@@ -1,0 +1,5 @@
+<ul>
+  {% for entry in entries %}
+  <li> {{entry.pub_date}} -- <a href="entry/{{entry.id}}">{{entry.title}}</a></li>
+  {% endfor %}
+</ul>

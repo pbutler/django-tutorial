@@ -1,0 +1,23 @@
+<h1>{{entry.title}}</h1>
+{{entry.pub_date}}
+<p>{{entry.body}}</p>
+<hr />
+
+<table width="50%" border="1" cellspacing="0">
+  {% for comment in entry.comment_set.all %}
+  <tr><td>
+		  <b>{{comment.subject}}</b><br/>
+		  by: {{comment.name}} on {{comment.pub_date}} <br/>
+		  <p> {{comment.body}}</p>
+         </td></tr>
+ {% endfor %}
+ </table>
+ <br/>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="/blog/entry/{{entry.id}}/comment" method="post">
+   {% csrf_token %}
+   <label>Name:</label> <input type="text" size="50" name="name" /><br/>
+   <label>Subject:</label> <input type="text" size="50" name="subject" /><br/>
+   <textarea rows="12" cols="60"  name="body"></textarea><br/>
+   <input type="submit" value="Comment" />
+</form>
